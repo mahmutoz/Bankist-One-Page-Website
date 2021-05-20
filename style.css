@@ -674,3 +674,24 @@ h4 {
   bottom: 0;
   z-index: 999;
 }
+
+.back__top {
+  position: fixed;
+  width: 50px;
+  height: 60px;
+  right: 40px;
+  bottom: 30px;
+  background-color: rgb(230, 230, 230);
+  border: 1px solid #999;
+  border-radius: 3px;
+  font-size: 36px;
+  text-align: center;
+  text-decoration: none;
+  z-index: 99;
+  transition: 0.3s all linear;
+}
+
+.back__top:hover {
+  background-color: var(--color-primary-darker);
+  color: #fff;
+}
