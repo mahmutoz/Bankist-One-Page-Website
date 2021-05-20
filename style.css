@@ -668,7 +668,11 @@ h4 {
   justify-content: space-evenly;
   width: 100%;
   background-color: white;
-  color: #bbb;
+  color: #aaa;
   font-size: 1.5rem;
+  padding: 10px 0;
   font-weight: 400;
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
 }
