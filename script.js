@@ -42,4 +42,16 @@ header.append(message);
 
 document.querySelector('.btn--close-cookie').addEventListener('click', () => {
   message.parentElement.removeChild(message);
-})
+});
+
+// Smooth Scrool
+const section1 = document.getElementById('section--1');
+document.querySelector('.btn--scroll-to').addEventListener('click', (e) => {
+  e.preventDefault();
+
+  const scroolCoords = section1.getBoundingClientRect();
+
+  section1.scrollIntoView({
+    behavior: 'smooth'
+  });
+});
