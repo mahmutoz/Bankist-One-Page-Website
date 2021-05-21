@@ -4,11 +4,13 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
-const scrollToTopBtn = document.querySelector('.back__top');
+const header = document.querySelector('.header');
 const nav = document.querySelector('.nav');
 const tab = document.querySelectorAll('.operations__tab');
 const tabsContent = document.querySelectorAll('.operations__tab-content');
 const tabsContainer = document.querySelector('.operations__tab-container');
+const message = document.createElement('div');
+const scrollToTopBtn = document.querySelector('.back__top');
 ///////////////////////////////////////
 // Modal window
 
@@ -35,19 +37,6 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-// Cookie Message
-const header = document.querySelector('.header');
-const message = document.createElement('div');
-message.classList.add('cookie-message');
-
-message.innerHTML = `We use cookied for improved functionality and analytics. <button class="btn btn--close-cookie">Got it!</button>`;
-
-header.append(message);
-
-document.querySelector('.btn--close-cookie').addEventListener('click', () => {
-  message.parentElement.removeChild(message);
-});
-
 // Smooth Scrool
 const section1 = document.getElementById('section--1');
 document.querySelector('.btn--scroll-to').addEventListener('click', (e) => {
@@ -72,9 +61,38 @@ const handleHover = function (e) {
   }
 };
 
-
 nav.addEventListener('mouseover', handleHover.bind(0.4));
 nav.addEventListener('mouseout', handleHover.bind(1));
+
+// Sticky navigation 
+const navHeight = nav.getBoundingClientRect().height;
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+}
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+});
+
+headerObserver.observe(header);
+
+
+// Cookie Message
+message.classList.add('cookie-message');
+
+message.innerHTML = `We use cookied for improved functionality and analytics. <button class="btn btn--close-cookie">Got it!</button>`;
+
+header.append(message);
+
+document.querySelector('.btn--close-cookie').addEventListener('click', () => {
+  message.parentElement.removeChild(message);
+});
 
 // back to top 
 window.addEventListener('scroll', function () {
