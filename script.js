@@ -4,6 +4,7 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const allSection = document.querySelectorAll('.section');
 const header = document.querySelector('.header');
 const nav = document.querySelector('.nav');
 const tab = document.querySelectorAll('.operations__tab');
@@ -70,8 +71,13 @@ const navHeight = nav.getBoundingClientRect().height;
 const stickyNav = function (entries) {
   const [entry] = entries;
 
-  if (!entry.isIntersecting) nav.classList.add('sticky');
-  else nav.classList.remove('sticky');
+  if (!entry.isIntersecting) {
+    nav.classList.add('sticky');
+    scrollToTopBtn.style.opacity = 1;
+  } else {
+    nav.classList.remove('sticky');
+    scrollToTopBtn.style.opacity = 0;
+  }
 }
 
 const headerObserver = new IntersectionObserver(stickyNav, {
@@ -82,6 +88,22 @@ const headerObserver = new IntersectionObserver(stickyNav, {
 
 headerObserver.observe(header);
 
+// Reveal section 
+const revealSection = function (entries) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove('section--hidden');
+}
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+
+allSection.forEach(function (section) {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
 
 // Cookie Message
 message.classList.add('cookie-message');
@@ -92,14 +114,4 @@ header.append(message);
 
 document.querySelector('.btn--close-cookie').addEventListener('click', () => {
   message.parentElement.removeChild(message);
-});
-
-// back to top 
-window.addEventListener('scroll', function () {
-  const yCoord = window.pageYOffset;
-  if (yCoord > 400) {
-    scrollToTopBtn.style.opacity = 1;
-  } else {
-    scrollToTopBtn.style.opacity = 0;
-  }
 });
