@@ -5,7 +5,10 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const scrollToTopBtn = document.querySelector('.back__top');
-
+const nav = document.querySelector('.nav');
+const tab = document.querySelectorAll('.operations__tab');
+const tabsContent = document.querySelectorAll('.operations__tab-content');
+const tabsContainer = document.querySelector('.operations__tab-container');
 ///////////////////////////////////////
 // Modal window
 
@@ -54,24 +57,26 @@ document.querySelector('.btn--scroll-to').addEventListener('click', (e) => {
   });
 });
 
-document.querySelectorAll('.nav__link').forEach(function (el) {
-  el.addEventListener('click', function (e) {
-    e.preventDefault();
-    const id = this.getAttribute('href');
-    document.querySelector(id).scrollIntoView({
-      behavior: 'smooth'
+// Menu fade animation
+const handleHover = function (e) {
+
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const sibling = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    sibling.forEach((el) => {
+      if (el !== link) el.style.opacity = this;
     });
-  });
-});
+    logo.style.opacity = this;
+  }
+};
+
+
+nav.addEventListener('mouseover', handleHover.bind(0.4));
+nav.addEventListener('mouseout', handleHover.bind(1));
 
 // back to top 
-// scrollToTopBtn.addEventListener('click', function (e) {
-//   e.preventDefault();
-//   document.querySelector(this.getAttribute('href')).scrollIntoView({
-//     behavior: 'smooth'
-//   });
-// });
-
 window.addEventListener('scroll', function () {
   const yCoord = window.pageYOffset;
   if (yCoord > 400) {
