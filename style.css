@@ -21,6 +21,7 @@
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -688,6 +689,7 @@ h4 {
   text-align: center;
   text-decoration: none;
   z-index: 99;
+  opacity: 0;
   transition: 0.3s all linear;
 }
 

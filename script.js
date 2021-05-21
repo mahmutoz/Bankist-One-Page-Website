@@ -1,12 +1,13 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const scrollToTopBtn = document.querySelector('.back__top');
+
+///////////////////////////////////////
+// Modal window
 
 const openModal = function (e) {
   e.preventDefault();
@@ -61,4 +62,21 @@ document.querySelectorAll('.nav__link').forEach(function (el) {
       behavior: 'smooth'
     });
   });
+});
+
+// back to top 
+// scrollToTopBtn.addEventListener('click', function (e) {
+//   e.preventDefault();
+//   document.querySelector(this.getAttribute('href')).scrollIntoView({
+//     behavior: 'smooth'
+//   });
+// });
+
+window.addEventListener('scroll', function () {
+  const yCoord = window.pageYOffset;
+  if (yCoord > 400) {
+    scrollToTopBtn.style.opacity = 1;
+  } else {
+    scrollToTopBtn.style.opacity = 0;
+  }
 });
