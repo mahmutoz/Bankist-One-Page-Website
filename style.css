@@ -276,7 +276,7 @@ h4 {
   background-color: #fff;
 }
 
-.operations__tab-container {
+.operations__tab--container {
   display: flex;
   justify-content: center;
 }
